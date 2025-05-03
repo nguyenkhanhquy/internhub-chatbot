@@ -3,8 +3,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: internhub-chatbot-image
-        container_name: internhub-chatbot-container
+        image: "internhub-chatbot"
+        container_name: "chatbot"
         restart: unless-stopped
         ports:
             - "4000:8080"
