@@ -7,7 +7,7 @@ services:
         container_name: "chatbot"
         restart: unless-stopped
         ports:
-            - "8080:8080"
+            - "4000:8080"
         volumes:
             - ./documents:/app/documents  # Mount thư mục 'documents' vào container
         environment:
