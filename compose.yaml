@@ -8,6 +8,10 @@ services:
         restart: unless-stopped
         ports:
             - "8080:8080"
+        volumes:
+            - ./documents:/app/documents  # Mount thư mục 'documents' vào container
+        environment:
+            - etl.file.input-directory=/app/documents  # Cập nhật đường dẫn trong container
         depends_on:
             - chroma
 
@@ -32,7 +36,7 @@ services:
         ports:
             - "11434:11434"
         volumes:
-            - ollama-data:/ollama
+            - ./ollama-data:/ollama
 #        volumes:
 #            - C:\ollama-data:/root/.ollama
 #        deploy:
@@ -45,6 +49,4 @@ services:
 
 volumes:
     chroma-data:
-        driver: local
-    ollama-data:
         driver: local
