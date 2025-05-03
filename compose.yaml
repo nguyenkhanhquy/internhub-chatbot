@@ -14,7 +14,8 @@ services:
         container_name: "chroma-db"
         restart: unless-stopped
         ports:
-            - "8000:8000"
+#            - "8000:8000"
+            - "8001:8000"
         volumes:
             - chroma-data:/chroma
         environment:
