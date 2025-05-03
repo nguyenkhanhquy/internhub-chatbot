@@ -11,7 +11,7 @@ public class CorsWebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedHeaders("https://www.internhub.works")
+                .allowedOrigins("https://www.internhub.works")
                 .allowedMethods("POST")
                 .allowedHeaders("Content-Type");
     }
