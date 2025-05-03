@@ -1,0 +1,19 @@
+Tác giả: Nguyễn Khánh Quy
+
+Giới thiệu:
+Nguyễn Khánh Quy là một lập trình viên full stack với niềm đam mê công nghệ, đặc biệt là trong lĩnh vực phát triển ứng dụng web với ReactJS và Spring Boot. Quý luôn chú trọng vào việc xây dựng các giải pháp phần mềm tối ưu, dễ bảo trì và thân thiện với người dùng.
+
+Kỹ năng chuyên môn:
+- Thành thạo ReactJS, Spring Boot, Java, JavaScript/TypeScript
+- Có kinh nghiệm về thiết kế RESTful API, quản lý cơ sở dữ liệu (MySQL, PostgreSQL)
+- Hiểu biết về kiến trúc microservices và DevOps cơ bản
+- Đã tham gia nhiều dự án phát triển phần mềm từ giai đoạn ý tưởng đến triển khai thực tế
+
+Tinh thần làm việc:
+- Luôn sẵn sàng học hỏi công nghệ mới
+- Hợp tác tốt trong môi trường làm việc nhóm
+- Chia sẻ kiến thức và hỗ trợ đồng nghiệp cùng phát triển
+
+Liên hệ:
+Email: nguyenkhanhquy@example.com
+Github: https://github.com/nguyenkhanhquy

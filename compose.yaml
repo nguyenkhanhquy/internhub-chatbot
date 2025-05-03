@@ -1,0 +1,47 @@
+services:
+    springboot:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: internhub-chatbot-image
+        container_name: internhub-chatbot-container
+        restart: unless-stopped
+        ports:
+            - "8080:8080"
+
+    chroma:
+        image: "ghcr.io/chroma-core/chroma:0.6.4.dev242"
+        container_name: "chroma-db"
+        restart: unless-stopped
+        ports:
+            - "8000:8000"
+        volumes:
+            - chroma-data:/chroma
+        environment:
+            - CHROMA_DB_DIR=/chroma
+        depends_on:
+            - ollama
+
+    ollama:
+        image: "ollama/ollama:latest"
+        container_name: "ollama"
+        restart: unless-stopped
+        ports:
+            - "11434:11434"
+        volumes:
+            - ollama-data:/ollama
+#        volumes:
+#            - C:\ollama-data:/root/.ollama
+#        deploy:
+#            resources:
+#                reservations:
+#                    devices:
+#                        - driver: nvidia
+#                          count: all
+#                          capabilities: [gpu]
+
+volumes:
+    chroma-data:
+        driver: local
+    ollama-data:
+        driver: local
