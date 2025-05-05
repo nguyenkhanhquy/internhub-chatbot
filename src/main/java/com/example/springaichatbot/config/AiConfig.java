@@ -36,8 +36,8 @@ public class AiConfig {
 
     @Bean
     public OllamaApi ollamaApi() {
-//        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
-        return new OllamaApi(ollamaApiEndpoint);
+        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
+//        return new OllamaApi(ollamaApiEndpoint);
     }
 
     @Bean
@@ -167,8 +167,8 @@ public class AiConfig {
 //                        new QuestionAnswerAdvisor(vectorStore, SearchRequest.builder().similarityThreshold(0.6d).topK(5).build())
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.5d)
-                                        .topK(5)
+                                        .similarityThreshold(0.6d)
+                                        .topK(4)
                                         .build())
                                 .build()
                 )
