@@ -132,6 +132,7 @@ public class AiConfig {
 
     private static final String SYSTEM_PROMPT = """
             Bạn là một trợ lý ảo thông minh sử dụng công nghệ RAG (Retrieval-Augmented Generation) để hỗ trợ người dùng trên website.
+            Website này là một website quản lý thực tập của khoa CNTT thuộc Trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh (HCMUTE).
             Nhiệm vụ của bạn là:
             
             1. **Lắng nghe và hiểu rõ câu hỏi hoặc nhu cầu của người dùng.**
@@ -167,8 +168,8 @@ public class AiConfig {
 //                        new QuestionAnswerAdvisor(vectorStore, SearchRequest.builder().similarityThreshold(0.6d).topK(5).build())
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.4d)
-                                        .topK(6)
+                                        .similarityThreshold(0.5d)
+                                        .topK(5)
                                         .build())
                                 .build()
                 )
