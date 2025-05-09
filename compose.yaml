@@ -3,13 +3,15 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: "internhub-chatbot"
+        image: "internhub-chatbot:latest"
         container_name: "chatbot"
         restart: unless-stopped
         ports:
             - "8081:8080"
         volumes:
             - ./documents:/app/documents  # Mount thư mục 'documents' vào container
+        networks:
+            - chatbot-network
         environment:
             - etl.file.input-directory=/app/documents  # Cập nhật đường dẫn trong container
             - ollama.api.endpoint=http://ollama:11434
@@ -26,6 +28,8 @@ services:
             - "8001:8000"
         volumes:
             - chroma-data:/chroma
+        networks:
+            - chatbot-network
         environment:
             - CHROMA_DB_DIR=/chroma
         depends_on:
@@ -39,6 +43,8 @@ services:
             - "11434:11434"
         volumes:
             - ./ollama-data:/root/.ollama
+        networks:
+            - chatbot-network
 #        volumes:
 #            - C:\ollama-data:/root/.ollama
 #        deploy:
@@ -52,3 +58,7 @@ services:
 volumes:
     chroma-data:
         driver: local
+
+networks:
+    chatbot-network:
+        driver: bridge
