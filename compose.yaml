@@ -12,6 +12,8 @@ services:
             - ./documents:/app/documents  # Mount thư mục 'documents' vào container
         environment:
             - etl.file.input-directory=/app/documents  # Cập nhật đường dẫn trong container
+            - ollama.api.endpoint=http://ollama:11434
+            - chroma.api.endpoint=http://chroma:8000
         depends_on:
             - chroma
 

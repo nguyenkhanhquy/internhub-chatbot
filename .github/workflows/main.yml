@@ -16,4 +16,9 @@ jobs:
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
                   port: 22
                   script: |
-                      echo "Hello from GitHub Actions!"
+                      cd docker/internhub-chatbot
+                      git fetch origin
+                      git checkout main
+                      git pull
+                      docker compose down -v
+                      docker compose up -d --build
