@@ -80,7 +80,6 @@ public class AiConfig {
                                 .builder()
                                 .model(openaiModel)
                                 .temperature(openaiTemperature)
-                                .topP(0.9)
                                 .build()
                 )
                 .build();
@@ -169,8 +168,8 @@ public class AiConfig {
 //                        new QuestionAnswerAdvisor(vectorStore, SearchRequest.builder().similarityThreshold(0.6d).topK(5).build())
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.7d)
-                                        .topK(7)
+                                        .similarityThreshold(0.55d)
+                                        .topK(6)
                                         .build())
                                 .build()
                 )
