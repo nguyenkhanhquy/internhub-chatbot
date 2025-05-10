@@ -6,7 +6,6 @@ import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
-import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.chroma.vectorstore.ChromaApi;
 import org.springframework.ai.chroma.vectorstore.ChromaVectorStore;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -132,20 +131,6 @@ public class AiConfig {
         return new InMemoryChatMemory();
     }
 
-    private static final String GEMMA_PROMPT = """
-        <start_of_turn>user
-        Dưới đây là thông tin có thể giúp bạn trả lời câu hỏi của người dùng:
-        
-        {documents}
-        
-        Câu hỏi của người dùng:
-        {question}
-        
-        Hãy trả lời bằng tiếng Việt, rõ ràng và dễ hiểu.
-        <end_of_turn>
-        <start_of_turn>model
-        """;
-
     private static final String SYSTEM_PROMPT = """
             Bạn là một trợ lý ảo thông minh sử dụng công nghệ RAG (Retrieval-Augmented Generation) để hỗ trợ người dùng trên website.
             Website này là một website quản lý thực tập của khoa CNTT thuộc Trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh (HCMUTE).
@@ -187,7 +172,6 @@ public class AiConfig {
                                         .similarityThreshold(0.7d)
                                         .topK(7)
                                         .build())
-                                .promptTemplate(new PromptTemplate(GEMMA_PROMPT))
                                 .build()
                 )
                 .build();
