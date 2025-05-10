@@ -54,7 +54,7 @@ public class EtlConfig {
                         log.info("Processing file: {}", filePath);
                         var tikaDocumentReader = new TikaDocumentReader(new FileSystemResource(message.getPayload().toString()));
                         var documents = tikaDocumentReader.read();
-                        var splitter = new TokenTextSplitter(500, 100, 50, 1000, true);
+                        var splitter = new TokenTextSplitter(512, 100, 128, 1000, true);
                         documents = splitter.apply(documents);
                         chromaVectorStore.accept(documents);
                         log.info("Processed file: {}", filePath);
