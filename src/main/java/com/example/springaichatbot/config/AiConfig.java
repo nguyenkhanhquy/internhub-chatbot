@@ -2,10 +2,8 @@ package com.example.springaichatbot.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-//import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
-//import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chroma.vectorstore.ChromaApi;
@@ -39,7 +37,6 @@ public class AiConfig {
     @Bean
     public OllamaApi ollamaApi() {
         return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
-//        return new OllamaApi(ollamaApiEndpoint);
     }
 
     @Bean
@@ -127,11 +124,6 @@ public class AiConfig {
     }
 
     // Chat Memory configuration
-//    @Bean
-//    public ChatMemory chatMemory() {
-//        return new InMemoryChatMemory();
-//    }
-
     @Bean
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
@@ -168,13 +160,11 @@ public class AiConfig {
                 .builder(chatModel)
                 .defaultSystem(SYSTEM_PROMPT)
                 .defaultAdvisors(
-//                        new MessageChatMemoryAdvisor(chatMemory),
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
-//                        new QuestionAnswerAdvisor(vectorStore, SearchRequest.builder().similarityThreshold(0.6d).topK(5).build())
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.45d)
-                                        .topK(4)
+                                        .topK(5)
                                         .build())
                                 .build()
                 )
