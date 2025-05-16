@@ -1,7 +1,7 @@
 package com.example.springaichatbot.controller;
 
-//import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
-import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
+import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
+//import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
 
 import com.example.springaichatbot.model.HumanMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class AiRestController {
                 .prompt()
                 .user(humanMessage.query())
                 .advisors(spec -> spec
-                        .param(CONVERSATION_ID, humanMessage.sessionId()))
+                        .param(CHAT_MEMORY_CONVERSATION_ID_KEY, humanMessage.sessionId()))
                 .stream()
                 .content()
                 .onErrorResume(e -> {
