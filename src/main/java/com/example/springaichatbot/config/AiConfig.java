@@ -5,7 +5,9 @@ import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 //import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
+//import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chroma.vectorstore.ChromaApi;
 import org.springframework.ai.chroma.vectorstore.ChromaVectorStore;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -36,8 +38,8 @@ public class AiConfig {
 
     @Bean
     public OllamaApi ollamaApi() {
-//        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
-        return new OllamaApi(ollamaApiEndpoint);
+        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
+//        return new OllamaApi(ollamaApiEndpoint);
     }
 
     @Bean
@@ -96,7 +98,11 @@ public class AiConfig {
 
     @Bean
     public ChromaApi chromaApi(RestClient.Builder restClientBuilder) {
-        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
+//        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
+        return ChromaApi.builder()
+                .baseUrl(chromaApiEndpoint)
+                .restClientBuilder(restClientBuilder)
+                .build();
     }
 
     // Ollama Embedding Model configuration
@@ -125,9 +131,16 @@ public class AiConfig {
     }
 
     // Chat Memory configuration
+//    @Bean
+//    public ChatMemory chatMemory() {
+//        return new InMemoryChatMemory();
+//    }
+
     @Bean
     public ChatMemory chatMemory() {
-        return new InMemoryChatMemory();
+        return MessageWindowChatMemory.builder()
+                .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .build();
     }
 
     private static final String SYSTEM_PROMPT = """
