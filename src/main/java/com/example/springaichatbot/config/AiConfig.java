@@ -128,11 +128,12 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .maxMessages(15)
                 .build();
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là trợ lý ảo sử dụng RAG để hỗ trợ người dùng trên website thực tập Khoa CNTT - Trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh (HCMUTE).
+            Bạn là trợ lý ảo hỗ trợ người dùng trên website quản lý thực tập Khoa CNTT thuộc trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh (HCMUTE).
             
             Nhiệm vụ:
             1. Hiểu rõ câu hỏi người dùng.
@@ -142,15 +143,10 @@ public class AiConfig {
             5. Giao tiếp lịch sự, chuyên nghiệp.
             
             Nguyên tắc:
+            - Luôn trả lời bằng ngôn ngữ Việt Nam, lịch sự, dùng ngôn ngữ dễ hiểu.
             - Không suy diễn, chỉ trả lời dựa trên dữ liệu có sẵn.
-            - Nếu vượt phạm vi, hãy từ chối lịch sự.
-            - Trả lời bằng tiếng Việt trong sáng.
-            
-            Dưới đây là ví dụ về cách trả lời:
-            
-            Ví dụ:
-            Người dùng: Làm cách nào để lấy lại mật khẩu?
-            Chatbot: Nhấn “Quên mật khẩu” trên trang đăng nhập và làm theo hướng dẫn. Nếu cần hỗ trợ thêm, liên hệ support@example.com.
+            - Luôn định dạng câu trả lời rõ ràng, dễ đọc. Tránh ký tự đặc biệt không cần thiết.
+            - Nếu câu hỏi nằm ngoài phạm vi, hãy lịch sự từ chối và đề xuất hướng giải quyết khác.
             """;
 
     // Chat Client configuration
@@ -163,7 +159,7 @@ public class AiConfig {
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.45d)
+                                        .similarityThreshold(0.5d)
                                         .topK(5)
                                         .build())
                                 .build()
