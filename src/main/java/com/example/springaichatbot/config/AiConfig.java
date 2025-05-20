@@ -1,6 +1,6 @@
 package com.example.springaichatbot.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
@@ -96,11 +96,12 @@ public class AiConfig {
 
     @Bean
     public ChromaApi chromaApi(RestClient.Builder restClientBuilder) {
-        return ChromaApi.builder()
-                .baseUrl(chromaApiEndpoint)
-                .restClientBuilder(restClientBuilder)
-                .objectMapper(new ObjectMapper())
-                .build();
+//        return ChromaApi.builder()
+//                .baseUrl(chromaApiEndpoint)
+//                .restClientBuilder(restClientBuilder)
+//                .objectMapper(new ObjectMapper())
+//                .build();
+        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
     }
 
     // Ollama Embedding Model configuration
