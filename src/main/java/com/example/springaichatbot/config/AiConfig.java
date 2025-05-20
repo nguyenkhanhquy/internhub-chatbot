@@ -89,16 +89,17 @@ public class AiConfig {
     private String chromaApiEndpoint;
 
     @Bean
-    public RestClient.Builder builder() {
+    public RestClient.Builder restClientBuilder() {
         return RestClient.builder().requestFactory(new SimpleClientHttpRequestFactory());
     }
 
     @Bean
     public ChromaApi chromaApi(RestClient.Builder restClientBuilder) {
-        return ChromaApi.builder()
-                .baseUrl(chromaApiEndpoint)
-                .restClientBuilder(restClientBuilder)
-                .build();
+//        return ChromaApi.builder()
+//                .baseUrl(chromaApiEndpoint)
+//                .restClientBuilder(restClientBuilder)
+//                .build();
+        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
     }
 
     // Ollama Embedding Model configuration
@@ -130,7 +131,6 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .maxMessages(15)
                 .build();
     }
 
