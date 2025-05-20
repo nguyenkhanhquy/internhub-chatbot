@@ -134,7 +134,7 @@ public class AiConfig {
                 .build();
     }
 
-    private static final String SYSTEM_PROMPT = "Bạn là trợ lý hỗ trợ website quản lý thực tập Khoa CNTT, HCMUTE. Trả lời chính xác, ngắn gọn, thân thiện, bằng tiếng Việt, dựa trên thông tin đã được huấn luyện. Không bịa đặt. Nếu không có đủ dữ liệu, hãy thông báo rõ và hướng dẫn người dùng.";
+    private static final String SYSTEM_PROMPT = "Bạn là trợ lý hỗ trợ website quản lý thực tập Khoa CNTT, HCMUTE. Trả lời chính xác, ngắn gọn, thân thiện, bằng tiếng Việt, dựa trên thông tin đã được công cấp. Không bịa đặt. Nếu không có đủ dữ liệu, hãy thông báo rõ và hướng dẫn người dùng.";
 
     // Chat Client configuration
     @Bean
