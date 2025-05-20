@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
-//import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
 
 @Slf4j
 @RestController
