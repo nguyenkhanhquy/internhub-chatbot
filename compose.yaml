@@ -20,7 +20,7 @@ services:
             - chroma
 
     chroma:
-        image: "ghcr.io/chroma-core/chroma:0.6.4.dev242"
+        image: "ghcr.io/chroma-core/chroma:1.0.9"
         container_name: "chroma-db"
         restart: unless-stopped
         ports:
