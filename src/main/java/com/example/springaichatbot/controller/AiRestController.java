@@ -27,9 +27,11 @@ public class AiRestController {
     @PostMapping("/inference")
     public Flux<String> ask(@RequestBody HumanMessage humanMessage) {
         log.info("Received message: {}", humanMessage);
-        return this.chatClient.prompt()
-                .advisors(advisor -> advisor.param(CHAT_MEMORY_CONVERSATION_ID_KEY, humanMessage.sessionId()))
+        return this.chatClient
+                .prompt()
                 .user(humanMessage.query())
+                .advisors(spec -> spec
+                        .param(CHAT_MEMORY_CONVERSATION_ID_KEY, humanMessage.sessionId()))
                 .stream()
                 .content()
                 .onErrorResume(e -> {
