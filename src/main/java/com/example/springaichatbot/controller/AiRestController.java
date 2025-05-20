@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
+import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
 
 @Slf4j
 @RestController
@@ -31,7 +31,7 @@ public class AiRestController {
                 .prompt()
                 .user(humanMessage.query())
                 .advisors(spec -> spec
-                        .param(CHAT_MEMORY_CONVERSATION_ID_KEY, humanMessage.sessionId()))
+                        .param(CONVERSATION_ID, humanMessage.sessionId()))
                 .stream()
                 .content()
                 .onErrorResume(e -> {

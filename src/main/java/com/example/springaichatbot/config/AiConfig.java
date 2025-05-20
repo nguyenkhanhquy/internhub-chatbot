@@ -89,13 +89,16 @@ public class AiConfig {
     private String chromaApiEndpoint;
 
     @Bean
-    public RestClient.Builder restClientBuilder() {
+    public RestClient.Builder builder() {
         return RestClient.builder().requestFactory(new SimpleClientHttpRequestFactory());
     }
 
     @Bean
     public ChromaApi chromaApi(RestClient.Builder restClientBuilder) {
-        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
+        return ChromaApi.builder()
+                .baseUrl(chromaApiEndpoint)
+                .restClientBuilder(restClientBuilder)
+                .build();
     }
 
     // Ollama Embedding Model configuration
@@ -115,9 +118,8 @@ public class AiConfig {
 
     // Chroma Vector Store configuration
     @Bean
-    public ChromaVectorStore chromaVectorStore(ChromaApi chromaApi, EmbeddingModel embeddingModel) {
-        return ChromaVectorStore
-                .builder(chromaApi, embeddingModel)
+    public ChromaVectorStore chromaVectorStore(EmbeddingModel embeddingModel, ChromaApi chromaApi) {
+        return ChromaVectorStore.builder(chromaApi, embeddingModel)
                 .collectionName("rag")
                 .initializeSchema(true)
                 .build();
@@ -162,7 +164,7 @@ public class AiConfig {
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.5d)
+                                        .similarityThreshold(0.7d)
                                         .topK(5)
                                         .build())
                                 .build()
