@@ -1,6 +1,5 @@
 package com.example.springaichatbot.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
@@ -99,9 +98,7 @@ public class AiConfig {
         return ChromaApi.builder()
                 .baseUrl(chromaApiEndpoint)
                 .restClientBuilder(restClientBuilder)
-                .objectMapper(new ObjectMapper())
                 .build();
-//        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
     }
 
     // Ollama Embedding Model configuration
@@ -113,7 +110,7 @@ public class AiConfig {
                 .defaultOptions(
                         OllamaOptions
                                 .builder()
-                                .model(OllamaModel.NOMIC_EMBED_TEXT)
+                                .model(OllamaModel.MXBAI_EMBED_LARGE)
                                 .build()
                 )
                 .build();
@@ -151,10 +148,6 @@ public class AiConfig {
             - Nếu người dùng hỏi ngoài phạm vi dữ liệu, hãy lịch sự từ chối và đề xuất hướng giải quyết khác.
             - Luôn kiểm tra lại độ chính xác của thông tin trước khi trả lời.
             - Giao tiếp bằng tiếng Việt, dùng ngôn ngữ trong sáng, dễ hiểu.
-            
-            Dưới đây là ví dụ về cách trả lời:
-            Người dùng: Làm cách nào để lấy lại mật khẩu tài khoản?
-            Trợ lý ảo: Để lấy lại mật khẩu, bạn hãy nhấn vào nút “Quên mật khẩu” trên trang đăng nhập, sau đó làm theo hướng dẫn để đặt lại mật khẩu mới. Nếu gặp khó khăn, vui lòng liên hệ bộ phận hỗ trợ qua email support@example.com.
             """;
 
     // Chat Client configuration
@@ -167,7 +160,7 @@ public class AiConfig {
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.5d)
+                                        .similarityThreshold(0.55d)
                                         .topK(5)
                                         .build())
                                 .build()
