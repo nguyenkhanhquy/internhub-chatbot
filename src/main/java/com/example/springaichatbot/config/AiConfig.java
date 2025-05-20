@@ -158,7 +158,7 @@ public class AiConfig {
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.5d)
-                                        .topK(5)
+                                        .topK(4)
                                         .build())
                                 .build()
                 )
