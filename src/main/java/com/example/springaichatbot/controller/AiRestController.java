@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-//import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
-import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
+//import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
 
 @Slf4j
 @RestController
@@ -28,11 +27,9 @@ public class AiRestController {
     @PostMapping("/inference")
     public Flux<String> ask(@RequestBody HumanMessage humanMessage) {
         log.info("Received message: {}", humanMessage);
-        return this.chatClient
-                .prompt()
+        return this.chatClient.prompt()
+                .advisors(advisor -> advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
                 .user(humanMessage.query())
-                .advisors(spec -> spec
-                        .param(CHAT_MEMORY_CONVERSATION_ID_KEY, humanMessage.sessionId()))
                 .stream()
                 .content()
                 .onErrorResume(e -> {

@@ -95,11 +95,10 @@ public class AiConfig {
 
     @Bean
     public ChromaApi chromaApi(RestClient.Builder restClientBuilder) {
-//        return ChromaApi.builder()
-//                .baseUrl(chromaApiEndpoint)
-//                .restClientBuilder(restClientBuilder)
-//                .build();
-        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
+        return ChromaApi.builder()
+                .baseUrl(chromaApiEndpoint)
+                .restClientBuilder(restClientBuilder)
+                .build();
     }
 
     // Ollama Embedding Model configuration
@@ -134,16 +133,12 @@ public class AiConfig {
                 .build();
     }
 
-    private static final String SYSTEM_PROMPT = """
-            Bạn là một trợ lý ảo thông minh hỗ trợ người dùng trên website quản lý thực tập của Khoa CNTT, Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE). Giao tiếp bằng tiếng Việt, dùng ngôn ngữ trong sáng, dễ hiểu.
-            Bắt đầu hỗ trợ người dùng ngay bây giờ!
-            """;
+    private static final String SYSTEM_PROMPT = "Bạn là trợ lý hỗ trợ website quản lý thực tập Khoa CNTT, HCMUTE. Trả lời chính xác, ngắn gọn, thân thiện, bằng tiếng Việt, dựa trên thông tin đã được huấn luyện. Không bịa đặt. Nếu không có đủ dữ liệu, hãy thông báo rõ và hướng dẫn người dùng.";
 
     // Chat Client configuration
     @Bean
     public ChatClient chatClient(OpenAiChatModel chatModel, ChatMemory chatMemory, ChromaVectorStore vectorStore) {
-        return ChatClient
-                .builder(chatModel)
+        return ChatClient.builder(chatModel)
                 .defaultSystem(SYSTEM_PROMPT)
                 .defaultAdvisors(
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
@@ -151,7 +146,8 @@ public class AiConfig {
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.5d)
                                         .topK(5)
-                                        .build())
+                                        .build()
+                                )
                                 .build()
                 )
                 .build();
