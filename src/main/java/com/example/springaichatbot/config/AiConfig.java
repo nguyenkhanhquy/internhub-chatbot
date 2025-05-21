@@ -128,11 +128,12 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .maxMessages(20)
                 .build();
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là trợ lý ảo thông minh hỗ trợ trả lời các câu hỏi của người dùng.
+            Bạn là trợ lý ảo thông minh hỗ trợ người dùng trên website quản lý thực tập Khoa CNTT thuộc trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh (HCMUTE)
             
             Nhiệm vụ của bạn là:
             
@@ -154,7 +155,7 @@ public class AiConfig {
             Người dùng: Làm cách nào để lấy lại mật khẩu tài khoản?
             Chatbot: Để lấy lại mật khẩu, bạn hãy nhấn vào nút “Quên mật khẩu” trên trang đăng nhập, sau đó làm theo hướng dẫn để đặt lại mật khẩu mới. Nếu gặp khó khăn, vui lòng liên hệ bộ phận hỗ trợ qua email support@example.com.
             
-            Hãy bắt đầu cuộc trò chuyện với người dùng và cung cấp thông tin hữu ích nhất có thể.
+            Hãy bắt đầu hổ trợ người dùng ngay bây giờ.
             """;
 
     // Chat Client configuration
