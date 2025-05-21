@@ -164,7 +164,7 @@ public class AiConfig {
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.5d)
+                                        .similarityThreshold(0.6d)
                                         .topK(5)
                                         .build()
                                 )
