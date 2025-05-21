@@ -162,12 +162,12 @@ public class AiConfig {
     public ChatClient chatClient(OpenAiChatModel chatModel, ChatMemory chatMemory, ChromaVectorStore vectorStore) {
         return ChatClient
                 .builder(chatModel)
-//                .defaultSystem(SYSTEM_PROMPT)
+                .defaultSystem(SYSTEM_PROMPT)
                 .defaultAdvisors(
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.4d)
+                                        .similarityThreshold(0.5d)
                                         .topK(5)
                                         .build())
                                 .build()
