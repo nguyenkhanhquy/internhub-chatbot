@@ -37,7 +37,6 @@ public class AiConfig {
     @Bean
     public OllamaApi ollamaApi() {
         return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
-//        return new OllamaApi(ollamaApiEndpoint);
     }
 
     @Bean
@@ -96,7 +95,6 @@ public class AiConfig {
 
     @Bean
     public ChromaApi chromaApi(RestClient.Builder restClientBuilder) {
-//        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
         return ChromaApi.builder()
                 .baseUrl(chromaApiEndpoint)
                 .restClientBuilder(restClientBuilder)
@@ -106,8 +104,7 @@ public class AiConfig {
     // Ollama Embedding Model configuration
     @Bean
     public OllamaEmbeddingModel embeddingModel(OllamaApi ollamaApi) {
-        return OllamaEmbeddingModel
-                .builder()
+        return OllamaEmbeddingModel.builder()
                 .ollamaApi(ollamaApi)
                 .defaultOptions(
                         OllamaOptions
@@ -121,8 +118,7 @@ public class AiConfig {
     // Chroma Vector Store configuration
     @Bean
     public ChromaVectorStore chromaVectorStore(ChromaApi chromaApi, EmbeddingModel embeddingModel) {
-        return ChromaVectorStore
-                .builder(chromaApi, embeddingModel)
+        return ChromaVectorStore.builder(chromaApi, embeddingModel)
                 .collectionName("rag")
                 .initializeSchema(true)
                 .build();
@@ -134,11 +130,10 @@ public class AiConfig {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
                 .build();
-//        return new InMemoryChatMemory();
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là một trợ lý ảo thông minh hỗ trợ người dùng trên website quản lý thực tập của Khoa CNTT, Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
+            Bạn là một trợ lý AI có nhiệm vụ hỗ trợ người dùng trong quá trình sử dụng website quản lý thực tập của Khoa CNTT, Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
             
             Nhiệm vụ của bạn là:
             1. Lắng nghe và hiểu rõ câu hỏi hoặc nhu cầu của người dùng.
@@ -163,8 +158,7 @@ public class AiConfig {
     // Chat Client configuration
     @Bean
     public ChatClient chatClient(OpenAiChatModel chatModel, ChatMemory chatMemory, ChromaVectorStore vectorStore) {
-        return ChatClient
-                .builder(chatModel)
+        return ChatClient.builder(chatModel)
                 .defaultSystem(SYSTEM_PROMPT)
                 .defaultAdvisors(
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
@@ -172,7 +166,8 @@ public class AiConfig {
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.5d)
                                         .topK(5)
-                                        .build())
+                                        .build()
+                                )
                                 .build()
                 )
                 .build();
