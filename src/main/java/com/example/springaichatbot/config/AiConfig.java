@@ -4,8 +4,9 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemory;
+//import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+//import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chroma.vectorstore.ChromaApi;
 import org.springframework.ai.chroma.vectorstore.ChromaVectorStore;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -36,7 +37,8 @@ public class AiConfig {
 
     @Bean
     public OllamaApi ollamaApi() {
-        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
+//        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
+        return new OllamaApi(ollamaApiEndpoint);
     }
 
     @Bean
@@ -126,10 +128,10 @@ public class AiConfig {
     // Chat Memory configuration
     @Bean
     public ChatMemory chatMemory() {
-        return MessageWindowChatMemory.builder()
-                .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .maxMessages(20)
-                .build();
+//        return MessageWindowChatMemory.builder()
+//                .chatMemoryRepository(new InMemoryChatMemoryRepository())
+//                .build();
+        return new InMemoryChatMemory();
     }
 
     private static final String SYSTEM_PROMPT = """
@@ -160,7 +162,7 @@ public class AiConfig {
     public ChatClient chatClient(OpenAiChatModel chatModel, ChatMemory chatMemory, ChromaVectorStore vectorStore) {
         return ChatClient
                 .builder(chatModel)
-                .defaultSystem(SYSTEM_PROMPT)
+//                .defaultSystem(SYSTEM_PROMPT)
                 .defaultAdvisors(
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)

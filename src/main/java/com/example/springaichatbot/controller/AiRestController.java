@@ -24,11 +24,18 @@ public class AiRestController {
         this.chatMemory = chatMemory;
     }
 
+    private static final String SYSTEM_PROMPT = """
+            Bạn là một trợ lý ảo thông minh hỗ trợ người dùng trên website quản lý thực tập của Khoa CNTT, Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
+            Chỉ cung cấp thông tin dựa trên dữ liệu hiện có, không tự suy diễn hoặc bịa thêm thông tin.
+            Bắt đầu hỗ trợ người dùng ngay bây giờ!
+            """;
+
     @PostMapping("/inference")
     public Flux<String> ask(@RequestBody HumanMessage humanMessage) {
         log.info("Received message: {}", humanMessage);
         return this.chatClient
                 .prompt()
+                .system(SYSTEM_PROMPT)
                 .user(humanMessage.query())
                 .advisors(spec -> spec
                         .param(CHAT_MEMORY_CONVERSATION_ID_KEY, humanMessage.sessionId()))
