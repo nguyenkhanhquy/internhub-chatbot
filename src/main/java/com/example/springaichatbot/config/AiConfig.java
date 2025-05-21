@@ -4,9 +4,8 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
-//import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
-//import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chroma.vectorstore.ChromaApi;
 import org.springframework.ai.chroma.vectorstore.ChromaVectorStore;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -37,8 +36,8 @@ public class AiConfig {
 
     @Bean
     public OllamaApi ollamaApi() {
-//        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
-        return new OllamaApi(ollamaApiEndpoint);
+        return OllamaApi.builder().baseUrl(ollamaApiEndpoint).build();
+//        return new OllamaApi(ollamaApiEndpoint);
     }
 
     @Bean
@@ -97,7 +96,11 @@ public class AiConfig {
 
     @Bean
     public ChromaApi chromaApi(RestClient.Builder restClientBuilder) {
-        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
+//        return new ChromaApi(chromaApiEndpoint, restClientBuilder);
+        return ChromaApi.builder()
+                .baseUrl(chromaApiEndpoint)
+                .restClientBuilder(restClientBuilder)
+                .build();
     }
 
     // Ollama Embedding Model configuration
@@ -128,10 +131,10 @@ public class AiConfig {
     // Chat Memory configuration
     @Bean
     public ChatMemory chatMemory() {
-//        return MessageWindowChatMemory.builder()
-//                .chatMemoryRepository(new InMemoryChatMemoryRepository())
-//                .build();
-        return new InMemoryChatMemory();
+        return MessageWindowChatMemory.builder()
+                .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .build();
+//        return new InMemoryChatMemory();
     }
 
     private static final String SYSTEM_PROMPT = """
@@ -141,7 +144,7 @@ public class AiConfig {
             1. Lắng nghe và hiểu rõ câu hỏi hoặc nhu cầu của người dùng.
             2. Tìm kiếm và trích xuất thông tin chính xác, phù hợp từ nguồn dữ liệu đã được cung cấp.
             3. Tạo ra câu trả lời tự nhiên, dễ hiểu, ngắn gọn và chính xác dựa trên thông tin tìm được.
-            4. Nếu không có đủ thông tin để trả lời, hãy thông báo rõ ràng cho người dùng và hướng dẫn họ cách liên hệ với bộ phận hỗ trợ phù hợp hoặc cung cấp các bước tiếp theo nên thực hiện.
+            4. Nếu không có đủ thông tin để trả lời, hãy thông báo rõ ràng cho người dùng và đề xuất các bước tiếp theo.
             5. Giữ thái độ thân thiện, chuyên nghiệp và tôn trọng mọi thắc mắc của người dùng.
             
             Một số nguyên tắc quan trọng:
@@ -152,7 +155,7 @@ public class AiConfig {
             
             Dưới đây là ví dụ về cách trả lời:
             Người dùng: Làm cách nào để lấy lại mật khẩu tài khoản?
-            Trợ lý ảo: Để lấy lại mật khẩu, bạn hãy nhấn vào nút “Quên mật khẩu” trên trang đăng nhập, sau đó làm theo hướng dẫn để đặt lại mật khẩu mới. Nếu gặp khó khăn, vui lòng liên hệ bộ phận hỗ trợ qua email support@example.com.
+            Trợ lý ảo: Để lấy lại mật khẩu, bạn hãy nhấn vào nút “Quên mật khẩu” trên trang đăng nhập, sau đó làm theo hướng dẫn để đặt lại mật khẩu mới.
             
             Bắt đầu hỗ trợ người dùng ngay bây giờ!
             """;
