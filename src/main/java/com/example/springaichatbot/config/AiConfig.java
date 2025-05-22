@@ -129,11 +129,12 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .maxMessages(15)
                 .build();
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là một trợ lý AI có nhiệm vụ hỗ trợ người dùng trong quá trình sử dụng website quản lý thực tập của Khoa CNTT, Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
+            Bạn là một trợ lý AI có nhiệm vụ hỗ trợ người dùng trong quá trình sử dụng website quản lý thực tập của Khoa Công nghệ Thông tin, trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
             
             Nhiệm vụ của bạn là:
             1. Lắng nghe và hiểu rõ câu hỏi hoặc nhu cầu của người dùng.
