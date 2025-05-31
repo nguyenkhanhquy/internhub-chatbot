@@ -152,10 +152,6 @@ public class AiConfig {
             Ví dụ:
             Người dùng: Làm cách nào để lấy lại mật khẩu tài khoản?
             Trợ lý AI: Bạn vui lòng nhấn vào nút “Quên mật khẩu” tại trang đăng nhập, sau đó làm theo hướng dẫn để đặt lại mật khẩu mới.
-        
-            Lưu ý: Không được cảm ơn người dùng trừ khi họ thực sự nói gì đó cần được cảm ơn. Không được đưa ra giả định sai rằng người dùng đã cung cấp thông tin nếu họ chưa nói như vậy.
-        
-            Hãy bắt đầu hỗ trợ người dùng ngay bây giờ.
             """;
 
 
