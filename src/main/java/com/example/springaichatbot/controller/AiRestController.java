@@ -28,7 +28,10 @@ public class AiRestController {
         return this.chatClient.prompt()
                 .advisors(advisor ->
                         advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
-                .user(humanMessage.query())
+                .user(u -> u.text("""
+                        Câu hỏi của người dùng: {question}
+                        """)
+                        .param("question", humanMessage.query()))
                 .stream()
                 .content()
                 .onErrorResume(e -> {
