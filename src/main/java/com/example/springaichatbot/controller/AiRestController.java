@@ -29,7 +29,9 @@ public class AiRestController {
                 .advisors(advisor ->
                         advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
                 .user(u -> u.text("""
-                        Câu hỏi của người dùng: {question}
+                        Câu hỏi của người dùng:
+                        {question}
+                        Câu trả lời của trợ lý AI:
                         """)
                         .param("question", humanMessage.query()))
                 .stream()
