@@ -1,6 +1,7 @@
 package com.example.springaichatbot.controller;
 
 import com.example.springaichatbot.model.HumanMessage;
+import com.example.springaichatbot.service.MySQLToChromaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -16,10 +17,12 @@ public class AiRestController {
 
     private final ChatClient chatClient;
     private final ChatMemory chatMemory;
+    private final MySQLToChromaService mySQLToChromaService;
 
-    public AiRestController(ChatClient chatClient, ChatMemory chatMemory) {
+    public AiRestController(ChatClient chatClient, ChatMemory chatMemory, MySQLToChromaService mySQLToChromaService) {
         this.chatClient = chatClient;
         this.chatMemory = chatMemory;
+        this.mySQLToChromaService = mySQLToChromaService;
     }
 
     @PostMapping("/inference")
@@ -46,5 +49,17 @@ public class AiRestController {
     public void resetSession(@PathVariable String sessionId) {
         chatMemory.clear(sessionId);
         log.info("Reset session memory for ID: {}", sessionId);
+    }
+
+    @PostMapping("/sync-mysql-to-chroma")
+    public String syncMySQLToChroma() {
+        try {
+            log.info("Bắt đầu đồng bộ dữ liệu từ MySQL sang ChromaDB...");
+            mySQLToChromaService.processDataFromMySQL();
+            return "Đồng bộ dữ liệu thành công từ MySQL sang ChromaDB!";
+        } catch (Exception e) {
+            log.error("Lỗi khi đồng bộ dữ liệu: {}", e.getMessage(), e);
+            return "Lỗi khi đồng bộ dữ liệu: " + e.getMessage();
+        }
     }
 }

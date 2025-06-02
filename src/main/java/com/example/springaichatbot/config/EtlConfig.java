@@ -1,6 +1,8 @@
 package com.example.springaichatbot.config;
 
 import java.io.File;
+
+import com.example.springaichatbot.service.MySQLToChromaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chroma.vectorstore.ChromaVectorStore;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
@@ -16,9 +18,12 @@ import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.file.FileReadingMessageSource.WatchEventType;
 import org.springframework.integration.file.dsl.Files;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @Configuration
 @EnableIntegration
+@EnableScheduling
 @Slf4j
 public class EtlConfig {
 
@@ -27,6 +32,12 @@ public class EtlConfig {
 
     @Value("${etl.file.polling-interval}")
     private long pollingRate;
+
+    private final MySQLToChromaService mySQLToChromaService;
+
+    public EtlConfig(MySQLToChromaService mySQLToChromaService) {
+        this.mySQLToChromaService = mySQLToChromaService;
+    }
 
     @Bean
     public IntegrationFlow fileReadingFlow() {
@@ -62,5 +73,17 @@ public class EtlConfig {
                         log.error("Error processing file {}: {}", filePath, ex.getMessage(), ex);
                     }
                 }).get();
+    }
+
+    // Tự động đồng bộ dữ liệu từ MySQL sang ChromaDB mỗi 30 phút
+    @Scheduled(fixedRate = 1800000) // 30 phút = 30 * 60 * 1000 ms
+    public void autoSyncMySQLToChroma() {
+        try {
+            log.info("Bắt đầu tự động đồng bộ dữ liệu từ MySQL sang ChromaDB...");
+            mySQLToChromaService.processDataFromMySQL();
+            log.info("Hoàn thành tự động đồng bộ dữ liệu");
+        } catch (Exception ex) {
+            log.error("Lỗi khi tự động đồng bộ dữ liệu: {}", ex.getMessage(), ex);
+        }
     }
 }
