@@ -39,21 +39,19 @@ public class MySQLToChromaService {
                         Map<String, Object> metadata = new HashMap<>();
                         metadata.put("product_id", entity.getProductId());
                         metadata.put("name", entity.getName());
-                        metadata.put("price", entity.getPrice());
-                        metadata.put("title", entity.getTitle());
                         
                         // Tạo content bao gồm tất cả thông tin quan trọng
                         String content = String.format(
-                            "Tên sản phẩm: %s\nTiêu đề: %s\nGiá: %.2f\nMô tả: %s",
-                            entity.getName(), 
-                            entity.getTitle(), 
-                            entity.getPrice(), 
+                            "Tên sản phẩm: %s%nTiêu đề: %s%nGiá: %.2f%nMô tả: %s",
+                            entity.getName(),
+                            entity.getTitle(),
+                            entity.getPrice(),
                             entity.getDescription()
                         );
                         
                         return new Document(content, metadata);
                     })
-                    .collect(Collectors.toList());
+                    .toList();
 
             // 3. Split text nếu cần
             var splitter = new TokenTextSplitter(520, 300, 20, 3000, true);
