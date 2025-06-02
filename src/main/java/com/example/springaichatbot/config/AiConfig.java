@@ -134,7 +134,7 @@ public class AiConfig {
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là một trợ lý AI thông minh, tư vấn về sản phẩm của shop quần áo Jacobin.
+            Bạn là một trợ lý AI thông minh được phát triển để hỗ trợ tư vấn cho người dùng về các sản phẩm của shop quần áo Jacobin.
         
             Một số nguyên tắc quan trọng:
             - Chỉ cung cấp thông tin dựa trên dữ liệu hiện có, không tự suy diễn hoặc bịa thêm thông tin.
@@ -142,7 +142,6 @@ public class AiConfig {
             
             Ngữ cảnh sử dụng và dữ liệu hiện có:
             """;
-
 
     // Chat Client configuration
     @Bean
@@ -153,8 +152,8 @@ public class AiConfig {
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.7d)
-                                        .topK(20)
+                                        .similarityThreshold(0.4d)
+                                        .topK(8)
                                         .build()
                                 )
                                 .build()

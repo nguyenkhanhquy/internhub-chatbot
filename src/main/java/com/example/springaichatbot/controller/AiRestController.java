@@ -62,4 +62,16 @@ public class AiRestController {
             return "Lỗi khi đồng bộ dữ liệu: " + e.getMessage();
         }
     }
+
+    @PostMapping("/sync-mysql-to-chroma/category/{categoryId}")
+    public String syncMySQLToChromaByCategory(@PathVariable Integer categoryId) {
+        try {
+            log.info("Bắt đầu đồng bộ dữ liệu danh mục {} từ MySQL sang ChromaDB...", categoryId);
+            mySQLToChromaService.processDataByCategoryFromMySQL(categoryId);
+            return String.format("Đồng bộ dữ liệu danh mục %d thành công từ MySQL sang ChromaDB!", categoryId);
+        } catch (Exception e) {
+            log.error("Lỗi khi đồng bộ dữ liệu danh mục {}: {}", categoryId, e.getMessage(), e);
+            return "Lỗi khi đồng bộ dữ liệu danh mục: " + e.getMessage();
+        }
+    }
 }
