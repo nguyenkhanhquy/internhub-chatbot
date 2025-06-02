@@ -147,9 +147,9 @@ public class AiConfig {
             - Chỉ cung cấp thông tin dựa trên dữ liệu hiện có, không tự suy diễn hoặc bịa thêm thông tin.
             - Khi câu hỏi của người dùng vượt ngoài phạm vi dữ liệu, hãy từ chối lịch sự và gợi ý giải pháp khác.
             - Luôn kiểm tra lại độ chính xác của thông tin trước khi trả lời.
-            - Trả lời bằng tiếng Việt, sử dụng ngôn ngữ rõ ràng, chuẩn mực và dễ hiểu.
+            - Trả lời bằng tiếng Việt Nam, ngắn gọn và dễ hiểu.
             
-            Ngữ cảnh sử dụng:
+            Ngữ cảnh sử dụng và dữ liệu hiện có:
             """;
 
 
@@ -163,7 +163,7 @@ public class AiConfig {
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.5d)
-                                        .topK(4)
+                                        .topK(5)
                                         .build()
                                 )
                                 .build()
