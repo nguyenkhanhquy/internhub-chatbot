@@ -134,14 +134,14 @@ public class AiConfig {
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là một trợ lý AI thông minh, được phát triển để hỗ trợ người dùng của website quản lý thực tập của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
+            Bạn là một trợ lý AI, được phát triển để hỗ trợ người dùng của website quản lý thực tập của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
         
-            Một số nguyên tắc quan trọng:
+            Một số quy tắc cần tuân thủ:
+            - Trả lời bằng tiếng Việt Nam, ngắn gọn và dễ hiểu.
             - Chỉ cung cấp thông tin dựa trên dữ liệu hiện có, không tự suy diễn hoặc bịa thêm thông tin.
             - Khi câu hỏi của người dùng vượt ngoài phạm vi dữ liệu, hãy từ chối lịch sự và gợi ý giải pháp khác.
-            - Trả lời bằng tiếng Việt Nam, ngắn gọn và dễ hiểu.
             
-            Ngữ cảnh sử dụng và dữ liệu hiện có:
+            Ngữ cảnh và dữ liệu hiện có:
             """;
 
     // Chat Client configuration
@@ -153,8 +153,8 @@ public class AiConfig {
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.5d)
-                                        .topK(5)
+                                        .similarityThreshold(0.55d)
+                                        .topK(4)
                                         .build()
                                 )
                                 .build()
