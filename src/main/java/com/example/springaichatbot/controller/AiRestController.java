@@ -31,7 +31,7 @@ public class AiRestController {
                 .user(u -> u.text("""
                         Câu hỏi của người dùng:
                         {question}
-                        Câu trả lời của trợ lý AI:
+                        Trợ lý AI trả lời:
                         """)
                         .param("question", humanMessage.query()))
                 .stream()
