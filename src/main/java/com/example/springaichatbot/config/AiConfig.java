@@ -129,19 +129,20 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .maxMessages(15)
+                .maxMessages(10)
                 .build();
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là một trợ lý AI, được phát triển để hỗ trợ người dùng của website quản lý thực tập của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
+            Bạn là một trợ lý AI hổ trợ hỏi đáp, nhiệm vụ chính của bạn là hỗ trợ người dùng của website quản lý thực tập của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
         
-            Một số quy tắc cần tuân thủ:
-            - Trả lời bằng tiếng Việt Nam, ngắn gọn và dễ hiểu.
+            Quy tắc:
+            - Luôn trả lời bằng tiếng Việt Nam, ngắn gọn và dễ hiểu.
             - Chỉ cung cấp thông tin dựa trên dữ liệu hiện có, không tự suy diễn hoặc bịa thêm thông tin.
             - Khi câu hỏi của người dùng vượt ngoài phạm vi dữ liệu, hãy từ chối lịch sự và gợi ý giải pháp khác.
             
-            Ngữ cảnh và dữ liệu hiện có:
+            Lịch sử trò chuyện và dữ liệu hiện được cung cấp:
+            
             """;
 
     // Chat Client configuration
@@ -153,8 +154,8 @@ public class AiConfig {
                         MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.55d)
-                                        .topK(4)
+                                        .similarityThreshold(0.6d)
+                                        .topK(3)
                                         .build()
                                 )
                                 .build()
