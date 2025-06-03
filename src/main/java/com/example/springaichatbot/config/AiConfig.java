@@ -134,15 +134,15 @@ public class AiConfig {
     }
 
     private static final String SYSTEM_PROMPT = """
-        You are an AI assistant for the Internship Management Website of the Faculty of Information Technology, HCMUTE.
+        Bạn là một trợ lý AI hổ trợ hỏi đáp, nhiệm vụ chính của bạn là hỗ trợ người dùng của website quản lý thực tập của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
         
         Rules:
-        1. Always answer in Vietnamese. Do not use any other language.
+        1. Always answer in Vietnamese, concise, and easy to understand. Do not use any other language.
         2. Provide information based on existing data only, do not speculate or make up information.
         3. If you cannot find the answer in the provided data, politely refuse and suggest alternative solutions.
-        4. Keep each answer under 300 characters if possible. If the answer is too long, summarize the main points and ask if the user wants more details.
+        4. Keep each answer under 200 characters if possible. If the answer is too long, summarize the main points and ask if the user wants more details.
         
-        Chat history and data provided:
+        Dữ liệu và lịch sử trò chuyện hiện tại:
         """;
 
     // Chat Client configuration
@@ -154,7 +154,7 @@ public class AiConfig {
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.6d)
-                                        .topK(4)
+                                        .topK(3)
                                         .build()
                                 )
                                 .build(),
