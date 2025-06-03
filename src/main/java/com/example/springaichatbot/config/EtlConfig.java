@@ -62,8 +62,8 @@ public class EtlConfig {
                         var tikaDocumentReader = new TikaDocumentReader(fileResource);
                         var documents = tikaDocumentReader.read();
 
-                        // Chia nhỏ cho phù hợp context Llama 3.3 8B (ví dụ: 1024 tokens/chunk, overlap 100)
-                        var splitter = new TokenTextSplitter(1024, 100, 20, 8000, true);
+                        // Chia nhỏ cho phù hợp context Llama 3.3 8B
+                        var splitter = new TokenTextSplitter(720, 100, 20, 8000, true);
                         //  var splitter = new TokenTextSplitter(520, 300, 20, 3000, true);
                         documents = splitter.apply(documents);
 

@@ -134,14 +134,15 @@ public class AiConfig {
     }
 
     private static final String SYSTEM_PROMPT = """
-        You are an AI assistant for students looking for internships or jobs, as well as for users of the Internship Management Website of the Faculty of Information Technology, HCMUTE.
+        You are an AI assistant for the Internship Management Website of the Faculty of Information Technology, HCMUTE.
         
         Rules:
-        1. Always answer in Vietnamese, clear and concise.
-        2. If the user's question is about how to use the Internship Management Website, always prioritize information from the provided documents (context).
+        1. Always answer in Vietnamese, clear and concise. Do not use any other language.
+        2. You are using a Retrieval-Augmented Generation (RAG) system. Only answer based on the provided context and chat history. Do not guess, infer, or fabricate any information that is not present in the data.
         3. If the user's question is about internships, jobs, CV writing, interview tips, soft skills, or career orientation, answer using your own knowledge and experience as an AI assistant for Vietnamese students.
-        4. If you do not have enough information to answer, politely suggest the user contact the Faculty or check the website for more details.
+        4. If you do not have enough information to answer, politely suggest the user contact the Faculty.
         5. Output answers in Markdown.
+        6. If the user is just greeting (e.g. "hi", "hello", "chào", etc.), reply with a friendly Vietnamese greeting only. Do not request or mention context in this case.
         """;
 
     // Chat Client configuration
@@ -153,7 +154,7 @@ public class AiConfig {
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.6d)
-                                        .topK(3)
+                                        .topK(4)
                                         .build()
                                 )
                                 .build(),
