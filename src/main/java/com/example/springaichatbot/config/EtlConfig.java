@@ -62,9 +62,7 @@ public class EtlConfig {
                         var tikaDocumentReader = new TikaDocumentReader(fileResource);
                         var documents = tikaDocumentReader.read();
 
-                        // Chia nhỏ cho phù hợp context Llama 3.3 8B
-                        var splitter = new TokenTextSplitter(720, 100, 20, 8000, true);
-                        //  var splitter = new TokenTextSplitter(520, 300, 20, 3000, true);
+                        var splitter = new TokenTextSplitter(520, 300, 20, 3000, true);
                         documents = splitter.apply(documents);
 
                         // Đưa vào vector store
