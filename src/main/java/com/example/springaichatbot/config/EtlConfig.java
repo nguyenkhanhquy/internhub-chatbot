@@ -50,14 +50,26 @@ public class EtlConfig {
         return IntegrationFlow.from(processedFileChannel())
                 .handle(message -> {
                     String filePath = message.getPayload().toString();
+                    FileSystemResource fileResource = new FileSystemResource(filePath);
+                    if (!fileResource.exists() || !fileResource.isReadable()) {
+                        log.error("File {} does not exist or is not readable.", filePath);
+                        return;
+                    }
                     try {
                         log.info("Processing file: {}", filePath);
-                        var tikaDocumentReader = new TikaDocumentReader(new FileSystemResource(message.getPayload().toString()));
+
+                        // Đọc file thành document
+                        var tikaDocumentReader = new TikaDocumentReader(fileResource);
                         var documents = tikaDocumentReader.read();
-                        var splitter = new TokenTextSplitter(520, 300, 20, 3000, true);
+
+                        // Chia nhỏ cho phù hợp context Llama 3.3 8B (ví dụ: 1024 tokens/chunk, overlap 100)
+                        var splitter = new TokenTextSplitter(1024, 100, 20, 8000, true);
+                        //  var splitter = new TokenTextSplitter(520, 300, 20, 3000, true);
                         documents = splitter.apply(documents);
+
+                        // Đưa vào vector store
                         chromaVectorStore.accept(documents);
-                        log.info("Processed file: {}", filePath);
+                        log.info("Successfully processed and stored file: {}", filePath);
                     } catch (Exception ex) {
                         log.error("Error processing file {}: {}", filePath, ex.getMessage(), ex);
                     }

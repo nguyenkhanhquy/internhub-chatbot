@@ -134,16 +134,15 @@ public class AiConfig {
     }
 
     private static final String SYSTEM_PROMPT = """
-            Bạn là một trợ lý AI hổ trợ hỏi đáp, nhiệm vụ chính của bạn là hỗ trợ người dùng của website quản lý thực tập của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
+        You are an AI assistant for the Internship Management Website of the Faculty of Information Technology, HCMUTE.
         
-            Quy tắc:
-            - Luôn trả lời bằng tiếng Việt Nam, ngắn gọn và dễ hiểu.
-            - Chỉ cung cấp thông tin dựa trên dữ liệu hiện có, không tự suy diễn hoặc bịa thêm thông tin.
-            - Khi câu hỏi của người dùng vượt ngoài phạm vi dữ liệu, hãy từ chối lịch sự và gợi ý giải pháp khác.
-            
-            Lịch sử trò chuyện và dữ liệu hiện được cung cấp:
-            
-            """;
+        Rules:
+        1. Always respond only in Vietnamese. Your answers must be clear, concise, and easy to understand. Do not use any other language.
+        2. You are using a Retrieval-Augmented Generation (RAG) system. Only answer based on the provided context and chat history. Do not guess, infer, or fabricate any information that is not present in the data.
+        3. If you cannot find the answer in the provided data, politely refuse and suggest alternative solutions.
+        4. Keep each answer under 300 characters if possible. If the answer is too long, summarize the main points and ask if the user wants more details.
+        5. Output all results in Markdown format.
+        """;
 
     // Chat Client configuration
     @Bean
@@ -151,14 +150,14 @@ public class AiConfig {
         return ChatClient.builder(chatModel)
                 .defaultSystem(SYSTEM_PROMPT)
                 .defaultAdvisors(
-                        MessageChatMemoryAdvisor.builder(chatMemory).build(),
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.6d)
                                         .topK(3)
                                         .build()
                                 )
-                                .build()
+                                .build(),
+                        MessageChatMemoryAdvisor.builder(chatMemory).build()
                 )
                 .build();
     }
