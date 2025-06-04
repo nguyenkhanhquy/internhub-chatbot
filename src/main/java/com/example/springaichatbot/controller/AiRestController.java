@@ -17,17 +17,19 @@ public class AiRestController {
 
     private final ChatClient chatClient;
     private final ChatMemory chatMemory;
+    private final DateTimeTools dateTimeTools;
 
-    public AiRestController(ChatClient chatClient, ChatMemory chatMemory) {
+    public AiRestController(ChatClient chatClient, ChatMemory chatMemory, DateTimeTools dateTimeTools) {
         this.chatClient = chatClient;
         this.chatMemory = chatMemory;
+        this.dateTimeTools = dateTimeTools;
     }
 
     @PostMapping("/inference")
     public Flux<String> ask(@RequestBody HumanMessage humanMessage) {
         log.info("Received message: {}", humanMessage);
         return this.chatClient.prompt()
-                .tools(new DateTimeTools())
+                .tools(dateTimeTools)
                 .advisors(advisor ->
                         advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
                 .user(u -> u.text("""
