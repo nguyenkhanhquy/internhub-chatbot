@@ -1,6 +1,7 @@
 package com.example.springaichatbot.controller;
 
 import com.example.springaichatbot.model.HumanMessage;
+import com.example.springaichatbot.tool.DateTimeTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -26,6 +27,7 @@ public class AiRestController {
     public Flux<String> ask(@RequestBody HumanMessage humanMessage) {
         log.info("Received message: {}", humanMessage);
         return this.chatClient.prompt()
+                .tools(new DateTimeTools())
                 .advisors(advisor ->
                         advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
                 .user(u -> u.text("""
