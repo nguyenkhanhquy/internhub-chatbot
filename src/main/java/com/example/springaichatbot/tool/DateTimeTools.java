@@ -14,6 +14,6 @@ public class DateTimeTools {
     String getCurrentDateTime() {
         String now = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toString();
         log.info("Current date and time in Asia/Ho_Chi_Minh timezone: {}", now);
-        return now;
+        return now.replaceAll("\\+\\d{2}:\\d{2}", "");
     }
 }
