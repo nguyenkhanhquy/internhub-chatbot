@@ -8,7 +8,7 @@ import java.time.ZoneId;
 
 @Component
 public class DateTimeTools {
-    @Tool(description = "Get the user's current date and time")
+    @Tool(description = "Get the current date and time in the user's timezone")
     String getCurrentDateTime() {
         return LocalDateTime.now().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toString();
     }

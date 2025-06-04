@@ -145,8 +145,7 @@ public class AiConfig {
         2. Keep each answer under 450 characters if possible. If the answer is too long, summarize the main points.
         3. Provide information based on existing data only, do not speculate or make up information.
         4. If you cannot find the answer in the provided data, politely refuse and suggest alternative solutions.
-        
-        Context:
+        5. All date and time information should be provided in the Vietnam timezone (UTC+7).
         """;
 
     // Chat Client configuration
