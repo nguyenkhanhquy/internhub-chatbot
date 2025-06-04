@@ -134,7 +134,8 @@ public class AiConfig {
     }
 
     private static final String SYSTEM_PROMPT = """
-        Bạn là một trợ lý AI hổ trợ hỏi đáp của website InternHub của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
+        Bạn là một trợ lý AI hổ trợ hỏi đáp.
+        Nhiệm vụ của bạn là hổ tợ người dùng của website InternHub của Khoa Công nghệ Thông tin, Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE).
         
         Rules:
         1. Always respond in Vietnamese. Do not use any other language.
@@ -152,8 +153,8 @@ public class AiConfig {
                 .defaultAdvisors(
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.5d)
-                                        .topK(4)
+                                        .similarityThreshold(0.55d)
+                                        .topK(5)
                                         .build()
                                 )
                                 .build(),
