@@ -4,18 +4,32 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Slf4j
 @Component
 public class DateTimeTools {
     @Tool(description = "Get the current date and time in the user's timezone")
     String getCurrentDateTime() {
-        String now = LocalDateTime.now().toString();
-        log.info("Current date time tool called: {}", now);
-        String userDateTime = LocalDateTime.now().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toString();
-        log.info("User date time tool called: {}", userDateTime);
-        return userDateTime;
+        ZonedDateTime zonedNow = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
+
+        int hour = zonedNow.getHour();
+        int minute = zonedNow.getMinute();
+        int second = zonedNow.getSecond();
+        int day = zonedNow.getDayOfMonth();
+        int month = zonedNow.getMonthValue();
+        int year = zonedNow.getYear();
+
+        String period = hour < 12 ? "sáng" : "chiều";
+        int displayHour = hour % 12 == 0 ? 12 : hour % 12;
+
+        String formatted = String.format(
+                "Bây giờ là %d giờ %02d phút %02d giây %s ngày %d/%d/%d theo múi giờ Việt Nam",
+                displayHour, minute, second, period, day, month, year
+        );
+
+        log.info("Formatted user date time: {}", formatted);
+        return formatted;
     }
 }
