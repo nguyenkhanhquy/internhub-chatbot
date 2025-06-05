@@ -29,7 +29,7 @@ public class AiRestController {
     public Flux<String> ask(@RequestBody HumanMessage humanMessage) {
         log.info("Received message: {}", humanMessage);
         return this.chatClient.prompt()
-                .tools(dateTimeTools)
+//                .tools(dateTimeTools)
                 .advisors(advisor ->
                         advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
                 .user(u -> u.text("""
