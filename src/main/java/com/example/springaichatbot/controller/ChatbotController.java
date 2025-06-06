@@ -13,13 +13,13 @@ import reactor.core.publisher.Flux;
 
 @Slf4j
 @RestController
-public class AiRestController {
+public class ChatbotController {
 
     private final ChatClient chatClient;
     private final ChatMemory chatMemory;
     private final DateTimeTools dateTimeTools;
 
-    public AiRestController(ChatClient chatClient, ChatMemory chatMemory, DateTimeTools dateTimeTools) {
+    public ChatbotController(ChatClient chatClient, ChatMemory chatMemory, DateTimeTools dateTimeTools) {
         this.chatClient = chatClient;
         this.chatMemory = chatMemory;
         this.dateTimeTools = dateTimeTools;
