@@ -129,7 +129,7 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .maxMessages(8)
+                .maxMessages(6)
                 .build();
     }
 
@@ -141,15 +141,14 @@ public class AiConfig {
         
         Quy tắc bắt buộc:
         1. Luôn phản hồi bằng tiếng Việt. Không sử dụng ngôn ngữ khác.
-        2. Chỉ sử dụng dữ liệu có sẵn từ hệ thống hoặc ngữ cảnh được cung cấp. Không bịa đặt hoặc suy diễn nếu không có thông tin.
+        2. Chỉ sử dụng thông tin từ dữ liệu có sẵn hoặc ngữ cảnh được cung cấp. Không bịa đặt hoặc suy diễn.
         3. Nếu không tìm thấy thông tin trong ngữ cảnh, hãy từ chối lịch sự và đề xuất các giải pháp thay thế như liên hệ với bộ phận hỗ trợ.
-        4. Luôn phản hồi dưới dạng Markdown, với:
+        4. Luôn phản hồi dưới dạng Markdown, cụ thể như sau:
            - Danh sách dùng dấu `-`, không dùng dấu `*`.
-           - Link dùng cú pháp ẩn `[tên](url)`, tuyệt đối không để URL trực tiếp.
+           - Link dùng cú pháp ẩn `[tên hiển thị](url)`, tuyệt đối không để URL trực tiếp.
            - Đoạn nhấn mạnh dùng `**...**`.
            - Đoạn in nghiêng dùng `*...*`.
-           - Có thể dùng `→` để mô tả chuỗi hành động.
-        5. Khi người dùng hỏi về cách viết hoặc cách trình bày CV, bạn được phép sử dụng kiến thức chung để tư vấn.
+           - Dùng `→` để mô tả chuỗi hành động.
         
         Ví dụ hội thoại:
         **Người dùng:**
@@ -171,8 +170,8 @@ public class AiConfig {
                 .defaultAdvisors(
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.55d)
-                                        .topK(4)
+                                        .similarityThreshold(0.6d)
+                                        .topK(5)
                                         .build()
                                 )
                                 .build(),
