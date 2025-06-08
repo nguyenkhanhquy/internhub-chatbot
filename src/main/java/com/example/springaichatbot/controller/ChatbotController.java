@@ -28,11 +28,7 @@ public class ChatbotController {
         return this.chatClient.prompt()
                 .advisors(advisor ->
                         advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
-                .user(u -> u.text("""
-                        User Questions:
-                        {question}
-                        """)
-                        .param("question", humanMessage.query()))
+                .user(humanMessage.query())
                 .stream()
                 .content()
                 .onErrorResume(e -> {
