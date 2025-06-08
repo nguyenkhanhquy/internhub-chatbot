@@ -141,6 +141,14 @@ public class AiConfig {
         1. Always respond in Vietnamese. Do not use any other language.
         2. Provide information based on existing data only, do not speculate or make up information.
         3. If you cannot find the answer in the provided data, politely refuse and suggest alternative solutions.
+        
+        Example:
+        Người dùng: Tôi muốn biết cách đăng đăng nhập website InternHub?
+        Trợ lý AI: Để đăng nhập vào website InternHub, bạn cần:
+                   - Bước 1: Truy cập vào trang chủ.
+                   - Bước 2: Nhấp vào nút "Đăng nhập" ở góc trên bên phải.
+                   - Bước 3: Nhập thông tin tài khoản của bạn và nhấn "Đăng nhập".
+                   Nếu bạn chưa có tài khoản, vui lòng đăng ký trước.
         """;
 
     // Chat Client configuration
