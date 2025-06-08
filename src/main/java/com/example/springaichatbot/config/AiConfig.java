@@ -109,7 +109,7 @@ public class AiConfig {
                 .defaultOptions(
                         OllamaOptions
                                 .builder()
-                                .model(OllamaModel.MXBAI_EMBED_LARGE)
+                                .model(OllamaModel.NOMIC_EMBED_TEXT)
                                 .build()
                 )
                 .build();
@@ -129,7 +129,7 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .maxMessages(10)
+                .maxMessages(8)
                 .build();
     }
 
@@ -141,6 +141,7 @@ public class AiConfig {
         1. Always respond in Vietnamese. Do not use any other language.
         2. Provide information based on existing data only, do not speculate or make up information.
         3. If you cannot find the answer in the provided data, politely refuse and suggest alternative solutions.
+        4. Format link URLs as clickable links.
         
         Example:
         Người dùng: Tôi muốn biết cách đăng đăng nhập website InternHub?
