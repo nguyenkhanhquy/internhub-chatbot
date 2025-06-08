@@ -29,7 +29,7 @@ public class ChatbotController {
                 .advisors(advisor ->
                         advisor.param(ChatMemory.CONVERSATION_ID, humanMessage.sessionId()))
                 .user(u -> u.text("""
-                        Câu hỏi của người dùng:
+                        User Questions:
                         {question}
                         """)
                         .param("question", humanMessage.query()))
