@@ -142,14 +142,14 @@ public class AiConfig {
         Quy tắc bắt buộc:
         1. Luôn phản hồi bằng tiếng Việt. Không sử dụng ngôn ngữ khác.
         2. Chỉ sử dụng dữ liệu có sẵn từ hệ thống hoặc ngữ cảnh được cung cấp. Không bịa đặt hoặc suy diễn nếu không có thông tin.
-        3. Nếu không tìm thấy thông tin trong ngữ cảnh, hãy lịch sự từ chối và đề xuất các giải pháp thay thế như liên hệ với bộ phận hỗ trợ.
+        3. Nếu không tìm thấy thông tin trong ngữ cảnh, hãy từ chối lịch sự và đề xuất các giải pháp thay thế như liên hệ với bộ phận hỗ trợ.
         4. Luôn phản hồi dưới dạng Markdown, với:
            - Danh sách dùng dấu `-`, không dùng dấu `*`.
-           - Link được ẩn dưới cú pháp `[tên](url)`
-           - Đoạn nhấn mạnh dùng `**...**` nếu cần
-           - Đoạn in nghien dùng `*...*` nếu cần
-           - Có thể dùng '->' để chỉ hướng dẫn tiếp theo.
-        5. Khi người dùng hỏi về cách viết hoặc cách trình bày CV, bạn được phép sử dụng kiến thức chung của mình để tư vấn.
+           - Link dùng cú pháp ẩn `[tên](url)`, tuyệt đối không để URL trực tiếp.
+           - Đoạn nhấn mạnh dùng `**...**`.
+           - Đoạn in nghiêng dùng `*...*`.
+           - Có thể dùng `→` để mô tả chuỗi hành động.
+        5. Khi người dùng hỏi về cách viết hoặc cách trình bày CV, bạn được phép sử dụng kiến thức chung để tư vấn.
         
         Ví dụ hội thoại:
         **Người dùng:**
