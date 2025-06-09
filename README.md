@@ -3,6 +3,7 @@
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/technologies/downloads/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.0-green.svg)](https://spring.io/projects/spring-boot)
 [![Maven](https://img.shields.io/badge/Maven-3.9.9-red.svg)](https://maven.apache.org/download.cgi)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](/LICENSE)
 
 ## 📋 Overview
 
@@ -14,8 +15,13 @@ Internhub Chatbot is a backend project built with Java and Spring Boot, providin
 - [Apache Maven](https://maven.apache.org/download.cgi) 3.9.9 or higher
 - [Spring Boot](https://spring.io/projects/spring-boot) 3.4.0 or higher
 
-## 👨‍💻 Author
+## 👨‍💻 Development Team
 
-| Author Name | Email | GitHub |
-|-----------|------------|--------|
-| Nguyen Khanh Quy | <nguyenkhanhquy123@gmail.com> | [@nguyenkhanhquy](https://github.com/nguyenkhanhquy) |
+| Full Name         | Student ID | GitHub                                               |
+|-------------------|------------|------------------------------------------------------|
+| Nguyen Khanh Quy  | 21110282   | [@nguyenkhanhquy](https://github.com/nguyenkhanhquy) |
+| Dinh Trung Nguyen | 21110259   | [@NguyenDink](https://github.com/NguyenDink)         |
+
+## 📄 License
+
+This project is licensed under the [MIT License](/LICENSE)
