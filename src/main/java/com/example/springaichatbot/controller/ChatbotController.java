@@ -33,7 +33,7 @@ public class ChatbotController {
                 .content()
                 .onErrorResume(e -> {
                     log.error("AI inference error for session {}: {}", humanMessage.sessionId(), e.getMessage(), e);
-                    return Flux.just("Đã có lỗi xảy ra, vui lòng thử lại sau!");
+                    return Flux.just("Hệ thống đã đạt giới hạn số lượng câu hỏi, vui lòng quay lại sau.");
                 });
     }
 

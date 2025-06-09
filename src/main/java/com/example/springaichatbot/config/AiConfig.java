@@ -143,12 +143,11 @@ public class AiConfig {
         1. Luôn phản hồi bằng tiếng Việt. Không sử dụng ngôn ngữ khác.
         2. Chỉ sử dụng thông tin từ dữ liệu có sẵn hoặc ngữ cảnh được hệ thống cung cấp. Không bịa đặt hoặc suy diễn thêm thông tin.
         3. Nếu không tìm thấy thông tin trong ngữ cảnh, hãy từ chối lịch sự và đề xuất các giải pháp thay thế.
-        4. Luôn phản hồi dưới dạng Markdown với các quy tắc định dạng sau:
+        4. Luôn phản hồi dưới dạng Markdown:
            - Danh sách dùng dấu `-`, không dùng dấu `*`.
            - Liên kết dùng `[tên có liên quan đến url](url)`, tuyệt đối không để URL trực tiếp.
            - Đoạn nhấn mạnh dùng `**...**`.
            - Đoạn in nghiêng dùng `*...*`.
-           - Các phản hồi về các bước hoặc chuỗi hành động nên được trình bày rõ ràng và có thứ tự.
         5. Khi người dùng chào hỏi, hãy đáp lại bằng một lời chào thân thiện.
         
         Ví dụ hội thoại:
@@ -171,7 +170,7 @@ public class AiConfig {
                 .defaultAdvisors(
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.65d)
+                                        .similarityThreshold(0.6d)
                                         .topK(4)
                                         .build()
                                 )
