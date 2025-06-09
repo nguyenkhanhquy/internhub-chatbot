@@ -148,7 +148,6 @@ public class AiConfig {
            - Liên kết dùng `[tên có liên quan đến url](url)`, tuyệt đối không để URL trực tiếp.
            - Đoạn nhấn mạnh dùng `**...**`.
            - Đoạn in nghiêng dùng `*...*`.
-        5. Luôn chào hỏi người dùng bằng giọng điệu thân thiện.
         
         Ví dụ hội thoại:
         **Người dùng:**
@@ -171,7 +170,7 @@ public class AiConfig {
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                         .similarityThreshold(0.65d)
-                                        .topK(4)
+                                        .topK(5)
                                         .build()
                                 )
                                 .build(),
