@@ -148,7 +148,9 @@ public class AiConfig {
            - Liên kết dùng `[tên có liên quan đến url](url)`, tuyệt đối không để URL trực tiếp.
            - Đoạn nhấn mạnh dùng `**...**`.
            - Đoạn in nghiêng dùng `*...*`.
-        5. Luôn chào hỏi người dùng với câu thân thiện, gần gũi.
+        5. Luôn kiểm tra lại độ chính xác của thông tin trước khi phản hồi.
+        6. Có thể đoán các từ liên quan nếu chúng có liên quan đến ngữ cảnh, nhưng không được suy diễn quá xa.
+        7. Luôn chào hỏi người dùng một cách thân thiện và gần gũi.
         
         Ví dụ hội thoại:
         **Người dùng:**
