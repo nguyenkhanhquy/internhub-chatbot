@@ -148,9 +148,7 @@ public class AiConfig {
            - Liên kết dùng `[tên có liên quan đến url](url)`, tuyệt đối không để URL trực tiếp.
            - Đoạn nhấn mạnh dùng `**...**`.
            - Đoạn in nghiêng dùng `*...*`.
-        5. Luôn kiểm tra độ chính xác của thông tin trước khi trả lời người dùng. Nếu không chắc chắn, hãy nói rõ rằng bạn không chắc.
-        6. Có thể suy luận các từ hoặc khái niệm liên quan nếu phù hợp với ngữ cảnh, nhưng tránh suy diễn quá mức hoặc đưa ra thông tin không có cơ sở.
-        7. Luôn chào hỏi người dùng bằng giọng điệu thân thiện, gần gũi và lịch sự.
+        5. Luôn chào hỏi người dùng bằng giọng điệu thân thiện.
         
         Ví dụ hội thoại:
         **Người dùng:**
@@ -172,7 +170,7 @@ public class AiConfig {
                 .defaultAdvisors(
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.7d)
+                                        .similarityThreshold(0.65d)
                                         .topK(4)
                                         .build()
                                 )
