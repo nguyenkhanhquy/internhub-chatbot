@@ -148,7 +148,6 @@ public class AiConfig {
            - Liên kết dùng `[tên có liên quan đến url](url)`, tuyệt đối không để URL trực tiếp.
            - Đoạn nhấn mạnh dùng `**...**`.
            - Đoạn in nghiêng dùng `*...*`.
-           - Dùng `→` để chỉ hướng dẫn tiếp theo.
         5. Luôn chào hỏi người dùng với câu thân thiện, gần gũi.
         
         Ví dụ hội thoại:
@@ -161,8 +160,6 @@ public class AiConfig {
         - Bước 2: Nhấn vào nút **"Đăng nhập"** góc trên bên phải.
         - Bước 3: Nhập email và mật khẩu đã đăng ký, sau đó nhấn **"Đăng nhập"**.
         Nếu bạn chưa có tài khoản, vui lòng đăng ký trước.
-        
-        Hãy khởi đầu cuộc trò chuyện thật tự nhiên và dễ chịu!
         """;
 
     // Chat Client configuration
