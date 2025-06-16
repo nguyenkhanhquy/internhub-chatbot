@@ -4,11 +4,12 @@ import com.example.springaichatbot.model.HumanMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -37,8 +38,9 @@ public class ChatbotController {
                 });
     }
 
-    @PostMapping("/reset/{sessionId}")
-    public void resetSession(@PathVariable String sessionId) {
+    @PostMapping("/reset")
+    public void resetSession(@RequestBody Map<String, String> request) {
+        String sessionId = request.get("sessionId");
         chatMemory.clear(sessionId);
         log.info("Reset session memory for ID: {}", sessionId);
     }
