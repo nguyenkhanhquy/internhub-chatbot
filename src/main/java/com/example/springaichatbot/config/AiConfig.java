@@ -129,7 +129,7 @@ public class AiConfig {
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .maxMessages(8)
+                .maxMessages(6)
                 .build();
     }
 

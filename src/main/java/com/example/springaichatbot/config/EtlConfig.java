@@ -62,7 +62,7 @@ public class EtlConfig {
                         var tikaDocumentReader = new TikaDocumentReader(fileResource);
                         var documents = tikaDocumentReader.read();
 
-                        var splitter = new TokenTextSplitter(520, 300, 20, 3000, true);
+                        var splitter = new TokenTextSplitter(600, 300, 20, 3000, true);
                         documents = splitter.apply(documents);
 
                         // Đưa vào vector store
