@@ -174,7 +174,7 @@ public class AiConfig {
                 .defaultAdvisors(
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.6d)
+                                        .similarityThreshold(0.55d)
                                         .topK(4)
                                         .build()
                                 )
