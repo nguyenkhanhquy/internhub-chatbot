@@ -56,8 +56,11 @@ public class AiConfig {
     @Value("${spring.ai.openai.api-key}")
     private String openaiApiKey;
 
-    @Value("${spring.ai.openai.base-url}")
+    @Value("${spring.ai.openai.chat.base-url}")
     private String openaiBaseUrl;
+
+    @Value("${spring.ai.openai.chat.completions-path}")
+    private String completionsPath;
 
     @Value("${spring.ai.openai.chat.options.model}")
     private String openaiModel;
@@ -67,7 +70,11 @@ public class AiConfig {
 
     @Bean
     public OpenAiApi openAiApi() {
-        return OpenAiApi.builder().apiKey(openaiApiKey).baseUrl(openaiBaseUrl).build();
+        return OpenAiApi.builder()
+                .apiKey(openaiApiKey)
+                .baseUrl(openaiBaseUrl)
+                .completionsPath(completionsPath)
+                .build();
     }
 
     @Bean
@@ -167,7 +174,7 @@ public class AiConfig {
                 .defaultAdvisors(
                         QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
-                                        .similarityThreshold(0.6d)
+                                        .similarityThreshold(0.55d)
                                         .topK(4)
                                         .build()
                                 )
